@@ -1,0 +1,37 @@
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = '0.1'
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'GyroToKey',  
+        	'Implementation-Version': version,
+        	'Main-Class': 'org.gyrotokey.GyroToKeyStart'
+    }
+    //baseName = project.name + '-all'
+    baseName = 'GyroToKey'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+  compile "jfree:jfreechart:1.0.12"
+}
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+repositories {
+    mavenCentral()
+}
