@@ -28,8 +28,6 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class DynamicChart extends ApplicationFrame implements Observer {
 
-	/** The most recent value added. */
-	private double lastValue = 100.0;
 	/** The time series data. */
 	private TimeSeries pitchSeries;
 

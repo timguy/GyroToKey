@@ -13,7 +13,7 @@ public class GyroToKeyStart {
 		if (args.length == 0) {
 			// without chart
 			new UDPServer(new KeyStroker()).start();
-		} else if (args.length == 1 && args[0].equalsIgnoreCase("g")) {
+		} else if (args.length == 1 && (args[0].equalsIgnoreCase("g") || args[0].equalsIgnoreCase("-g"))) {
 			// Gui stuff - switch on for finding the right treshholds
 			DynamicChart chart = new DynamicChart("Gyro Data");
 			new UDPServer(new KeyStroker(), chart).start();

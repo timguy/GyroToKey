@@ -15,6 +15,8 @@ import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.xml.datatype.Duration;
+
 import org.gyrotokey.NavigationEvent;
 
 public class KeyStroker implements Observer {
@@ -35,6 +37,7 @@ public class KeyStroker implements Observer {
 	}
 
 	private void pressOrRelease(boolean push, int keycode) {
+		System.out.println("Push: " + push + " Keycode: "+ keycode);
 		if (push) {
 			robot.keyPress(keycode);
 		} else {
@@ -45,8 +48,10 @@ public class KeyStroker implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		robot.waitForIdle(); //takes only ~28 ms. So most probably not really waiting for processing but only the method call cost
+		robot.setAutoWaitForIdle(true);
+		
 		NavigationEvent nav = (NavigationEvent) arg;
-
 		// cursor navigation
 		pressOrRelease(nav.getComplTiltPitch() < -PITCH_TRESHHOLD, KeyEvent.VK_UP);
 		pressOrRelease(nav.getComplTiltPitch() > PITCH_TRESHHOLD, KeyEvent.VK_DOWN);
@@ -60,10 +65,11 @@ public class KeyStroker implements Observer {
 		// rescue
 		pressOrRelease(nav.getComplTiltPitch() > PITCH_EXTREME_BACKWARD_, KeyEvent.VK_R);
 
-		// fire
+		// fire - TODO adjust or invent new thing to recognize
 		double currentYaw = Math.abs(nav.getComplYaw());
 		pressOrRelease(currentYaw - lastYaw > YAW_DISTANCE, KeyEvent.VK_SPACE);
 		lastYaw = currentYaw;
+		
 	}
 
 }
