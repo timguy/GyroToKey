@@ -2,8 +2,7 @@ package org.gyrotokey.observer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JPanel;
 
@@ -26,22 +25,33 @@ import org.jfree.ui.RefineryUtilities;
  * dynamically add (random) data by clicking on a button.
  *
  */
-public class DynamicChart extends ApplicationFrame implements Observer {
+public class DynamicChart extends ApplicationFrame implements Runnable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/** The time series data. */
 	private TimeSeries pitchSeries;
 
 	private TimeSeries rollSeries;
+	
+	private BlockingQueue<NavigationEvent> queue;
 
 	/**
 	 * Constructs a new demonstration application.
+	 * @param queue 
 	 *
 	 * @param title
 	 *            the frame title.
 	 */
-	public DynamicChart(final String title) {
+	public DynamicChart(BlockingQueue<NavigationEvent> queue) {
 
-		super(title);
+		super("Gyro Data");
+		
+		this.queue = queue;
+		
 		this.pitchSeries = new TimeSeries("Pitch", Millisecond.class);
 		this.rollSeries = new TimeSeries("Roll", Millisecond.class);
 		final TimeSeriesCollection datasetPitch = new TimeSeriesCollection(this.pitchSeries);
@@ -71,7 +81,7 @@ public class DynamicChart extends ApplicationFrame implements Observer {
 	 * @return A sample chart.
 	 */
 	private JFreeChart createChart(final XYDataset dataset, XYDataset datasetRoll) {
-		final JFreeChart result = ChartFactory.createTimeSeriesChart("Dynamic Data Demo", "Time", "Value", dataset,
+		final JFreeChart result = ChartFactory.createTimeSeriesChart("Gyrosensor data", "Time", "Value", dataset,
 				true, true, false);
 
 		final XYPlot plot = result.getXYPlot();
@@ -90,11 +100,21 @@ public class DynamicChart extends ApplicationFrame implements Observer {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		NavigationEvent nav = (NavigationEvent) arg;
-		// plot new data
-		this.pitchSeries.addOrUpdate(new Millisecond(), nav.getComplTiltPitch());
-		this.rollSeries.addOrUpdate(new Millisecond(), nav.getComplTiltRoll());
+	public void run() {
+		while(true)
+		{
+			try {
+				NavigationEvent nav = queue.take();
+				// plot new data
+				this.pitchSeries.addOrUpdate(new Millisecond(), nav.getComplTiltPitch());
+				this.rollSeries.addOrUpdate(new Millisecond(), nav.getComplTiltRoll());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.exit(1);
+			}
+		}
+		
 	}
 
 }

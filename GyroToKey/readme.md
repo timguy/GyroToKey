@@ -5,11 +5,8 @@
  * install on your android from appstore: "sensor fusion" from lunds universitet
  * select "complement tilt", "complement yaw" on second screen and send it via WLAN to your ip adress of your pc
  * Start GyroToKey.jar:
- 
- You have two options to start: 
- "java -jar GyroToKey.jar" and 
- "java -jar GyroToKey.jar g"
-the last one starts with graphical chart output.
+
+ "java -jar GyroToKey.jar" 
 
 * Start with graphical output and move your phone. You should see the chart moving
 *  Test if buttons are hit for your correctly. E.g. open SuperTuxKart directly or use an empty document or a site like https://scratch.mit.edu/projects/20966625/#fullscreen
@@ -21,6 +18,10 @@ the last one starts with graphical chart output.
  * awkward key presses
  	* Settings in robot class:
  		* robot.setAutoWaitForIdle(true); //make it more precise but slow
- 	* Maybe build threads to be faster?
- * Ideas: configure treshholds in properties or via a GUI, more keystroker classes for other games
+ 	* Changed from Observer pattern to multi thread application communicating via queues. To slow processing of incoming UDP is not the reason :-/. Still hanging keys and delays while key presses
+ 		* Disadvantage now: No seperation in main now if gui should started or not. Now it's always started (now issue due to multi threaded)
+ * Ideas: 
+ 	* configure treshholds in properties or via a GUI
+ 	* more keystroker classes for other games
+ 	* interfaces for everything to cope with different android applications or games
  
