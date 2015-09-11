@@ -20,6 +20,7 @@
  		* robot.setAutoWaitForIdle(true); //make it more precise but slow
  	* Changed from Observer pattern to multi thread application communicating via queues. To slow processing of incoming UDP is not the reason :-/. Still hanging keys and delays while key presses
  		* Disadvantage now: No seperation in main now if gui should started or not. Now it's always started (now issue due to multi threaded)
+	* tried also with xev on command line to see key presses. Could not find issues. 
  * Ideas: 
  	* configure treshholds in properties or via a GUI
  	* more keystroker classes for other games
