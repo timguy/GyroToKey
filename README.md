@@ -1,5 +1,6 @@
  **GyroToKey**
- * transforms gyrosensor data on mobile via WLAN into keypress on PC 
+ * transforms gyrosensor (gyroscope) data on mobile via WLAN into keypress on PC 
+  * mobile could be mounted on a wobble board
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=abzgmvMiwXM
 " target="_blank"><img src="http://img.youtube.com/vi/abzgmvMiwXM/0.jpg" 
@@ -31,3 +32,4 @@ the last one starts with graphical chart output.
  	* Maybe build threads to be faster?
  * Ideas: configure treshholds in properties or via a GUI, more keystroker classes for other games
  
+* key words: gyro2key, wobble board, balance board, key press, key stroke, surfboard game controller, transform / translate movements into keyboard key press
