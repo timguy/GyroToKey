@@ -1,21 +1,27 @@
- **GyroToKey**
- * transforms gyrosensor (gyroscope) data on mobile via WLAN into keypress on PC 
-  * mobile could be mounted on a wobble board
+# GyroToKey
+
+Transforms gyrosensor (gyroscope) data on mobile via WLAN into keypress on PC. 
+* Mobile could be mounted on a wobble board
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=abzgmvMiwXM
 " target="_blank"><img src="http://img.youtube.com/vi/abzgmvMiwXM/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
- **How to use**
+## Motivation
+* I started this project because I could not find something similar - if there is something similar, please write me
+
+## Getting Started
+
  * install on your android from appstore: "sensor fusion" from lunds universitet
   * select "complement tilt", "complement yaw" on second screen and send it via WLAN to your ip adress of your pc
  * GyroToKey
   * Install: https://github.com/timguy/GyroToKey/releases/download/v0.1/GyroToKey-0.1.jar 
   * Start GyroToKey.jar:
- 
- You have two options to start: 
+ You have two options to start:
+``` 
  "java -jar GyroToKey.jar" and 
  "java -jar GyroToKey.jar g"
+``` 
 the last one starts with graphical chart output.
 
 * Start with graphical output and move your phone. You should see the chart moving
@@ -25,11 +31,19 @@ the last one starts with graphical chart output.
 * Mount your phone on a wobble board if you want
 
 
- **Issues**
- * awkward key presses
+
+## Contributing
+Open issues, help to develop further for other games, or other apps
+
+## Issues
+* awkward key presses
  	* Settings in robot class:
  		* robot.setAutoWaitForIdle(true); //make it more precise but slow
  	* Maybe build threads to be faster?
  * Ideas: configure treshholds in properties or via a GUI, more keystroker classes for other games
  
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
 * key words: gyro2key, wobble board, balance board, key press, key stroke, surfboard game controller, transform / translate movements into keyboard key press
