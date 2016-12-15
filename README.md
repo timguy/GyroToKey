@@ -36,11 +36,16 @@ the last one starts with graphical chart output.
 Open issues, help to develop further for other games, or other apps
 
 ## Issues
-* awkward key presses
+ * awkward key presses
  	* Settings in robot class:
  		* robot.setAutoWaitForIdle(true); //make it more precise but slow
- 	* Maybe build threads to be faster?
- * Ideas: configure treshholds in properties or via a GUI, more keystroker classes for other games
+ 	* Changed from Observer pattern to multi thread application communicating via queues. To slow processing of incoming UDP is not the reason :-/. Still hanging keys and delays while key presses
+ 		* Disadvantage now: No seperation in main now if gui should started or not. Now it's always started (now issue due to multi threaded)
+	* tried also with xev on command line to see key presses. Could not find issues. 
+ * Ideas: 
+ 	* configure treshholds in properties or via a GUI
+ 	* more keystroker classes for other games
+ 	* interfaces for everything to cope with different android applications or games
  
 ## License
 
