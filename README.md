@@ -8,7 +8,7 @@ Transforms gyrosensor (gyroscope) data on mobile via WLAN into keypress on PC.
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 ## Motivation
-* I started this project because I could not find something similar - if there is something similar, please write me
+I started this project because I could not find something similar - if there is something similar, please write me
 
 ## Getting Started
 
